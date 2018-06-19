@@ -1,19 +1,528 @@
-<input type="text" placeholder="Username" [(ngModel)]="form.username" />
-<input type="text" placeholder="First Name" [(ngModel)]="form.firstname" />
-<input type="text" placeholder="Last Name" [(ngModel)]="form.lastname" />
-<button (click)="insert()">Add</button>
-<br />
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let person of people">
-            <td>{{ person.firstname }}</td>
-            <td>{{ person.lastname }}</td>
-        </tr>
-    </tbody>
-</table>
+<!--Navbar-->
+<header class="h-100">
+        <mdb-navbar SideClass="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar intro-fixed-nav" [containerInside]="false">
+          <logo>
+            <a class="logo navbar-brand" href="#">
+              <strong>iMuseum</strong>
+            </a>
+          </logo>
+          <links>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item waves-light" [class.active]="this.link=='home'" mdbWavesEffect>
+                <a class="nav-link" (click)="this.changeLink('home')">Home
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item" [class.active]="this.link=='about'">
+                        <a class="nav-link" href="#about" (click)="this.changeLink('about')">About Us</a>
+                </li>
+                <li class="nav-item" [class.active]="this.link=='events'">
+                    <a class="nav-link" href="#events" (click)="this.changeLink('events')">Events</a>
+                </li>
+                <li class="nav-item" [class.active]="this.link=='team'">
+                    <a class="nav-link" href="#team" (click)="this.changeLink('team')">Our Team</a>
+                </li>
+                <li class="nav-item" [class.active]="this.link=='gallery'">
+                        <a class="nav-link" href="#gallery" (click)="this.changeLink('gallery')">Gallery</a>
+                </li>
+                <li class="nav-item" [class.active]="this.link=='contact'">
+                        <a class="nav-link" href="#contact" (click)="this.changeLink('contact')">Contact Us</a>
+                </li> 
+              <li class="nav-item dropdown" dropdown [hidden]="!this.loggedIn.canActivate()" [class.active]="this.link=='update'" (click)="this.changeLink('update')">
+                    <a dropdownToggle  class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+                        Update
+                        <span class="caret"></span>
+                    </a>
+                    <div  class="dropdown-menu dropdown inner" role="menu">
+                        <a (click)="modal.open('lg')" routerLink="/museums" class="dropdown-item waves-light"  href="#">Museums</a>
+                        <a (click)="modal.open('lg')" routerLink="/artefact" class="dropdown-item waves-light" mdbRippleRadius href="#">Artefacts</a>
+                        <a (click)="modal.open('lg')" routerLink="/signup" class="dropdown-item waves-light" mdbRippleRadius href="#">Users</a>
+                        <a class="dropdown-item waves-light" mdbRippleRadius href="#">Gallery</a>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav nav-flex-icons">
+                    <li class="nav-item waves-light" mdbWavesEffect [hidden]="!this.loggedIn.canActivate()"> 
+                        <a class="nav-link"><img class="avatar" src="../assets/images/imm3.jpg" alt="Third slide"> Welcome: {{this.loggedIn.username}}</a>
+                    </li>
+                    <li class="nav-item waves-light" mdbWavesEffect [hidden]="this.loggedIn.canActivate()">
+                        <a routerLink="/login" (click)="modal.open('lg')" class="btn btn-sm btn-success">Log In</a>
+                    </li>
+                    <li class="nav-item waves-light" mdbWavesEffect [hidden]="!this.loggedIn.canActivate()">
+                            <a (click)="this.loggedIn.signOut()" class="btn btn-sm btn-danger">Log out</a>
+                    </li>
+                </ul>
+          </links>
+        </mdb-navbar>
+     </header>
+<!--Navbar-->
+
+
+
+<div #museum id="museum" class="container modal" >
+<bs-modal #modal >
+        <bs-modal-header [showDismiss]="false" >
+        <msw-navbar></msw-navbar>
+        </bs-modal-header>
+        <bs-modal-body>
+                <div><router-outlet></router-outlet></div>
+        </bs-modal-body>
+        <bs-modal-footer [showDefaultButtons]="false" [hidden]="!this.loggedIn.canActivate()">
+                <button type="button" class="btn btn-success"  (click)="insert();modal.close()"
+                [disabled]="!this.formDataService.validSave">Submit</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Close</button>
+        </bs-modal-footer>
+    </bs-modal>
+    
+</div>
+<!--div>
+    <bs-modal #modalUser style="overflow: auto !important; ">
+        <bs-modal-header [showDismiss]="false" style = "text-align:center;" >
+            <msw-navbar></msw-navbar>
+            </bs-modal-header>
+            <bs-modal-body>
+                    <div><router-outlet name='log'></router-outlet></div>
+            </bs-modal-body>
+    </bs-modal>
+</div-->
+
+<!--Carousel Wrapper-->
+<mdb-carousel class="carousel slide auto carousel-slide" [animation]="'slide'">
+    <!--First slide-->
+    <mdb-slide>
+        <div class="view hm-black-slight">
+            <img class="d-block w-100 full-width" src="../assets/images/imm4.jpg" alt="First slide">
+            <div class="mask waves-light" mdbRippleRadius></div>
+        </div>
+        <div class="carousel-caption">
+            <h3 class="h3-responsive">Light mask</h3>
+            <p>First text</p>
+        </div>
+    </mdb-slide>
+    <!--/First slide-->
+    <!--Second slide-->
+    <mdb-slide>
+        <div class="view hm-black-slight">
+            <img class="d-block w-100 full-width" src="../assets/images/imm1.jpg" alt="Second slide">
+            <div class="mask waves-light" mdbRippleRadius></div>
+        </div>
+        <div class="carousel-caption">
+            <h3 class="h3-responsive">Strong mask</h3>
+            <p>Secondary text</p>
+        </div>
+    </mdb-slide>
+    <!--/Second slide-->
+    <!--Third slide-->
+    <mdb-slide>
+        <div class="view hm-black-slight">
+            <img class="d-block w-100 full-width" src="../assets/images/imm2.jpg" alt="Third slide">
+            <div class="mask waves-light" mdbRippleRadius></div>
+        </div>
+        <div class="carousel-caption">
+            <h3 class="h3-responsive">Slight mask</h3>
+            <p>Third text</p>
+        </div>
+    </mdb-slide>
+    <!--/Third slide-->
+    <!--Forth slide-->
+    <mdb-slide>
+        <div class="view hm-black-slight">
+            <img class="d-block w-100 full-width" src="../assets/images/imm3.jpg" alt="Third slide">
+            <div class="mask waves-light" mdbRippleRadius></div>
+        </div>
+        <div class="carousel-caption">
+            <h3 class="h3-responsive">Slight mask</h3>
+            <p>Third text</p>
+        </div>
+    </mdb-slide>
+    <!--/Forth slide-->
+</mdb-carousel>
+<!--/.Carousel Wrapper-->
+
+<!--About Us -->
+<div class="container-about">
+    <div class="container">
+            
+        <div class="page-header" id="about">
+            <h1 class="text-center text-info" style="padding-top:1.6em">ABOUT<br /><span class="fa fa-user"></span></h1>
+        </div>
+        <div class="row">
+            <div class="col-md-6 text-justify">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+                specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining
+                essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
+                Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+                of Lorem Ipsum.
+            </div>
+            <div class="col-md-6 text-justify">
+                It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to
+                using 'Content here, content here', making it look like readable English. Many desktop publishing packages
+                and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will
+                uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by
+                accident, sometimes on purpose.
+            </div>
+        </div>
+    </div>
+</div>
+<!--/About Us -->
+
+<!--Latest events-->
+<div class="container-events">
+    <div class="container">
+        <div class="page-header well" style="background-color:#F1F7F7;width:100%" id="events">
+            <hr>
+            <h1 class="text-center text-danger" style="padding-top:58px">LATEST EVENTS <br/><span class="fa fa-paint-brush"></span></h1>
+            <hr>
+        </div>
+
+        <div class="row my-6">
+            <!--First columnn-->
+            <div class="col-lg-4">
+                <!--Card-->
+                <div class="card wow fadeIn" data-wow-delay="0.2s">
+
+                    <!--Card image-->
+                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(120).jpg" alt="Card image cap">
+
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">Mesmerizing Landscapes</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-info">Read more</a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+            </div>
+            <!--First columnn-->
+
+            <!--Second columnn-->
+            <div class="col-lg-4">
+                <!--Card-->
+                <div class="card wow fadeIn" data-wow-delay="0.4s">
+
+                    <!--Card image-->
+                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(123).jpg" alt="Card image cap">
+
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">Trevelers Toolbox</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-info">Read more</a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+
+            </div>
+            <!--Second columnn-->
+
+            <!--Third columnn-->
+            <div class="col-lg-4 mb-4">
+                <!--Card-->
+                <div class="card wow fadeIn" data-wow-delay="0.6s">
+
+                    <!--Card image-->
+                    <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(122).jpg" alt="Card image cap">
+
+                    <!--Card content-->
+                    <div class="card-body">
+                        <!--Title-->
+                        <h4 class="card-title">Mountain Rivers</h4>
+                        <!--Text-->
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-info">Read more</a>
+                    </div>
+
+                </div>
+                <!--/.Card-->
+            </div>
+            <!--Third columnn-->
+        </div>
+    </div>
+</div>
+<!--/Latest events-->
+
+<!-- Team / staff members -->
+<div class="container-team">
+    <br/>
+    <div class="container">
+            <div class="page-headerwell" style="background-color:white;width:100%" id="team">
+                    <h1 class="text-center" style="padding-top:1.6em">OUR TEAM<br /><span class="fa fa-users"></span></h1>
+                    <p class="text-center">
+                        The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, <br />
+                        as opposed to using "Content here, content here", making it look like readable English.
+                    </p>
+                    <br/>
+                </div>
+                <br/>
+        <div class="row my-6">
+        <!-- Member 1 card-container -->
+        <div class="card-container col-lg-4">
+            <div class="card ">
+                <div class="front">
+                    <div class="cover">
+                        <img src="../assets/images/img3.jpg"/>
+                    </div>
+                    <div class="user">
+                        <img class="img-circle" src="../assets/images/Male.png"/>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h3 class="name">Herman Kandjimi</h3>
+                            <p class="profession"> Managing Director</p>
+                            <hr class="text-warning">
+                            <p class="text-center"> <i class="fa fa-quote-left"></i>I'm the new Sinatra, and since I made it here I can make it anywhere, yeah, they love me everywhere"
+                                <i class="fa fa-quote-right"></i></p>
+                        </div>
+                        <div class="footer">
+                            <div class="rating">
+                                <i class="fa fa-refresh"></i> Hover for more info
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end front panel -->
+                <div class="back">
+                    <br/>
+                    <div class="header">
+                        <h2 class="motto">"To be or not to be, this is my awesome motto!"</h2>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h4 class="text-center">Job Description</h4>
+                            <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+
+                            <div class="stats-container">
+                                <div class="stats">
+                                    <h4><i class="fa fa-phone"></i>Office</h4>
+                                    <p>
+                                        +264 61 0000000
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4><i class="fa fa-fax"></i> Fax</h4>
+                                    <p>
+                                        +264 61 0000000
+                                    </p>
+                                </div>
+                                <div class="stats-big">
+                                    <h4><i class="fa fa-envelope"></i>E-mail</h4>
+                                    <p>
+                                        hkandjimi@outlook.com
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="social-links text-center">
+                            <a href="http://creative-tim.com" class="facebook text-primary"><i class="fa fa-facebook-square fa-2x"></i></a>
+                            <a href="http://creative-tim.com" class="google text-danger"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                            <a href="http://creative-tim.com" class="twitter text-info"><i class="fa fa-twitter-square fa-2x"></i></a>
+                        </div>
+                    </div>
+                </div> <!-- end back panel -->
+            </div> <!-- end card -->
+        </div> <!-- end card-container -->
+        <!-- Member 2 card-container -->
+        <div class="card-container col-lg-4">
+            <div class="card ">
+                <div class="front">
+                    <div class="cover">
+                        <img src="images/rotating_card_thumb3.png"/>
+                    </div>
+                    <div class="user">
+                        <img class="img-circle" src="../assets/images/Female.png"/>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h3 class="name">Inna Corman</h3>
+                            <p class="profession">Product Manager</p>
+
+                            <p class="text-center">"I'm the new Sinatra, and since I made it here I can make it anywhere, yeah, they love me everywhere"</p>
+                        </div>
+                        <div class="footer">
+                            <div class="rating">
+                                <i class="fa fa-mail-forward"></i> Auto Rotation
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end front panel -->
+                <div class="back">
+                    <div class="header">
+                        <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h4 class="text-center">Job Description</h4>
+                            <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+
+                            <div class="stats-container">
+                                <div class="stats">
+                                    <h4>235</h4>
+                                    <p>
+                                        Followers
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4>114</h4>
+                                    <p>
+                                        Following
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4>35</h4>
+                                    <p>
+                                        Projects
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="social-links text-center">
+                            <a href="http://creative-tim.com" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                            <a href="http://creative-tim.com" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
+                            <a href="http://creative-tim.com" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
+                        </div>
+                    </div>
+                </div> <!-- end back panel -->
+            </div> <!-- end card -->
+        </div><!-- end card-container -->
+        <!-- Member 3 card-container -->
+        <div class="card-container col-lg-4">
+            <div class="card ">
+                <div class="front">
+                    <div class="cover">
+                        <img src="images/rotating_card_thumb3.png"/>
+                    </div>
+                    <div class="user">
+                        <img class="img-circle" src="../assets/images/Female.png"/>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h3 class="name">Inna Corman</h3>
+                            <p class="profession">Product Manager</p>
+
+                            <p class="text-center">"I'm the new Sinatra, and since I made it here I can make it anywhere, yeah, they love me everywhere"</p>
+                        </div>
+                        <div class="footer">
+                            <div class="rating">
+                                <i class="fa fa-mail-forward"></i> Auto Rotation
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end front panel -->
+                <div class="back">
+                    <div class="header">
+                        <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
+                    </div>
+                    <div class="content">
+                        <div class="main">
+                            <h4 class="text-center">Job Description</h4>
+                            <p class="text-center">Web design, Adobe Photoshop, HTML5, CSS3, Corel and many others...</p>
+
+                            <div class="stats-container">
+                                <div class="stats">
+                                    <h4>235</h4>
+                                    <p>
+                                        Followers
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4>114</h4>
+                                    <p>
+                                        Following
+                                    </p>
+                                </div>
+                                <div class="stats">
+                                    <h4>35</h4>
+                                    <p>
+                                        Projects
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="social-links text-center">
+                            <a href="http://creative-tim.com" class="facebook"><i class="fa fa-facebook fa-fw"></i></a>
+                            <a href="http://creative-tim.com" class="google"><i class="fa fa-google-plus fa-fw"></i></a>
+                            <a href="http://creative-tim.com" class="twitter"><i class="fa fa-twitter fa-fw"></i></a>
+                        </div>
+                    </div>
+                </div> <!-- end back panel -->
+            </div> <!-- end card -->
+        </div><!-- end card-container -->
+        </div>
+    </div>
+    <br/>
+</div>
+<!--/ Team / staff members -->
+
+<!-- Image gallery -->
+<div class="row card-group">
+</div>
+<!--/ Image gallery -->
+<footer class="page-footer font-small top-nav-collapse pt-0">
+    <!--Footer Links-->
+    <div class="container">
+
+            <!--First row-->
+            <div class="row">
+    
+                <!--First column-->
+                <div class="col-md-12">
+    
+                    <div class="mb-5 flex-center">
+    
+                        <!--Facebook-->
+                        <a class="fb-ic">
+                            <i class="fa fa-facebook fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Twitter-->
+                        <a class="tw-ic">
+                            <i class="fa fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Google +-->
+                        <a class="gplus-ic">
+                            <i class="fa fa-google-plus fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Linkedin-->
+                        <a class="li-ic">
+                            <i class="fa fa-linkedin fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Instagram-->
+                        <a class="ins-ic">
+                            <i class="fa fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x"> </i>
+                        </a>
+                        <!--Pinterest-->
+                        <a class="pin-ic">
+                            <i class="fa fa-pinterest fa-lg white-text fa-2x"> </i>
+                        </a>
+                    </div>
+                </div>
+                <!--/First column-->
+            </div>
+            <!--/First row-->
+            <!--Copyright-->
+        <!--/.Copyright-->
+        </div>
+        <div class="footer-copyright  text-center">
+                © 2018 Copyright:
+                <a href="/"> Independence Memorial Museum </a>
+                <br/>
+            </div>
+            <br/>
+        <!--/Footer Links-->
+    
+</footer>

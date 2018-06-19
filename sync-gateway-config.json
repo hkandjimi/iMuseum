@@ -1,13 +1,15 @@
 {
     "log":["CRUD+", "REST+", "Changes+", "Attach+"],
     "databases": {
-        "nraboy": {
-            "server":"walrus:",
+        "imuseum": {
+            "server":"http://localhost:8091",
             "sync":`
-                function (doc) {
-                    channel (doc.channels);
-                }
-            `,
+            function (doc) {
+                channel (doc.channels);
+            }
+        `,
+            "enable_shared_bucket_access": true,
+            "import_docs": "continuous",
             "users": {
                 "GUEST": {
                     "disabled": false,

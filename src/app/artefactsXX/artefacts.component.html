@@ -1,0 +1,68 @@
+<div style="padding:10px;">
+    <form #artefactForm="ngForm" ngSubmit="save()" class="editForm" novalidate>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="title">Title:</label>
+                <input class="form-control" #title="ngModel" required id="title" type="text" placeholder="Artefact title" [(ngModel)]="artefact.title"
+                    name="title" />
+                <div class="alert alert-danger" [hidden]="title.valid">Title is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="summary">artefact details(summary):</label>
+                <!--input class="form-control" #summary="ngModel" required id="summary" type="text" placeholder="Brief summary of the museum"
+                    [(ngModel)]="artefact.summary" name="summary" /-->
+                    <textarea class="form-control" rows="5" #summary="ngModel" required id="summary" type="text" placeholder="Brief summary of the museum \n\n"
+                    [(ngModel)]="artefact.summary" name="summary"></textarea>
+                <div class="alert alert-danger" [hidden]="summary.valid">Artefact details/summary is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="minor_id">Minor ID:</label>
+                <input class="form-control" #minor="ngModel" required id="minor_id" type="number" placeholder="Minor ID" [(ngModel)]="artefact.minor_id"
+                    name="minor_id" />
+                <div class="alert alert-danger" [hidden]="minor.valid">Minor ID is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="major_id">Major ID:</label>
+                <input class="form-control" #major="ngModel" required id="major_id" type="number" placeholder="Major ID" [(ngModel)]="artefact.major_id"
+                    name="major_id" />
+                <div class="alert alert-danger" [hidden]="major.valid">Major ID is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="images">Images</label>
+                <input class="form-control" #imagess="ngModel" required id="images" type="text" placeholder="Images or cover image for artefact"
+                    [(ngModel)]="this.images" name="images" />
+                <div class="alert alert-danger" [hidden]="imagess.valid">artefact image(s) is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="videos">Videos</label>
+                <input class="form-control" #videoss="ngModel" id="videos" type="text" placeholder="Videos or cover video for artefact" [(ngModel)]="this.videos"
+                    name="videos" />
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="audio">Audio Recordings</label>
+                <input class="form-control" #audios="ngModel" id="audio" type="text" placeholder="Audio recording or songs for artefact" [(ngModel)]="this.audio"
+                    name="audio" />
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12' [hidden]="saved||!artefactForm.valid">
+            <div class="form-group">
+                <label class="checkbox-inline">
+                    <input style="font-size:36px" type="checkbox" value="" (click)="save()"> Confirm Details provided are accurate and you are Human
+                </label>
+            </div>
+        </div>
+
+    </form>
+</div>

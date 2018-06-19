@@ -1,14 +1,34 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
-  <title>PouchProject</title>
+  <title>iMuseum</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
+
 <body>
   <app-root>Loading...</app-root>
 </body>
+<script>
+  $(window).scroll(function () {
+    //Handling of tob navbar color changes on scroll
+    if ($(window).scrollTop() >= 50) {
+      $('.navbar').css('background', 'rgba(52, 152, 219,1.0)');
+    } else {
+      $('.navbar').css('background', 'rgba(52, 152, 219,0.2)');
+    }
+  });
+
+  // Mix It Up Gallery and Magnific Popup setup
+  /*$('.container-gallery').mixItUp();
+        $('.container-gallery').magnificPopup({
+            delegate: 'a',
+            type: 'image'
+        });*/
+</script>
+<script src="../node_modules/ng2-bs3-modal/bundles/ng2-bs3-modal.system.js"></script>
 </html>

@@ -1,0 +1,21 @@
+<div class="container">
+        <div class="row" style="text-align: center;">
+                <div class="col-12">
+                <h1 >Welcome to the iMuseum Admin Menu </h1>
+                </div>
+        </div>
+        <div class="row" [hidden]="!this.loggedIn.canActivate()">
+            <div class="col-3">
+                    <a routerLink="/museums"><button type="button" class="btn btn-default btn-circle"><i class="fa fa-university"></i><br>Museum</button></a>
+            </div>
+            <div class="col-3">
+                    <a routerLink="/signup"><button type="button" class="btn btn-primary btn-circle"><i class="fa fa-users"></i><br>Users</button></a>
+            </div>
+            <div class="col-3">
+                    <a routerLink="/artefact"><button type="button" class="btn btn-warning btn-circle"><i class="fa fa-cubes"></i><br>Artefacts</button></a>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-success btn-circle"><i class="fa fa-image"></i><br>Images</button>
+            </div>
+        </div>
+    </div>

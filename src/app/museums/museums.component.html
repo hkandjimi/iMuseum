@@ -1,0 +1,76 @@
+<div style="padding:10px;">
+    <form #museumForm="ngForm"  ngSubmit="save()" class="editForm" novalidate>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="name">Museum name:</label>
+                <input class="form-control" #name="ngModel" required id="name" type="text" placeholder="Name" [(ngModel)]="museum.name" name="M_name"
+                />
+                <div class="alert alert-danger" [hidden]="name.valid">Museum Name is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="details">Museum details:</label>
+                <textarea class="form-control" #details="ngModel" required id="details" type="text" placeholder="Brief summary of the museum"
+                    [(ngModel)]="museum.details" name="details"></textarea>
+                <div class="alert alert-danger" [hidden]="details.valid">Museum details/summary is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="region">Region</label>
+                <input class="form-control" #region="ngModel" required id="region" type="text" placeholder="Region" [(ngModel)]="museum.region"
+                    name="region" />
+                <div class="alert alert-danger" [hidden]="region.valid">Region is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="latitude">Latitude:</label>
+                <input class="form-control" #latitude="ngModel" required id="latitude" type="text" placeholder="Latitude" [(ngModel)]="museum.lat"
+                    name="latitude" />
+                <div class="alert alert-danger" [hidden]="latitude.valid">Museum latitude is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="name">Longitude:</label>
+                <input class="form-control" #longitude="ngModel" required id="longitude" type="text" placeholder="Longitude" [(ngModel)]="museum.long"
+                    name="Longitude" />
+                <div class="alert alert-danger" [hidden]="longitude.valid">Museum Longitude is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="name">Images</label>
+                <input class="form-control" #images="ngModel" required id="images" type="text" placeholder="Images or cover image for museum"
+                    [(ngModel)]="this.media" name="images" />
+                <div class="alert alert-danger" [hidden]="images.valid">Museum image(s) is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="name">Contact number:</label>
+                <input class="form-control" #contact="ngModel" required id="contact" type="text" placeholder="Museum contact number" [(ngModel)]="museum.contact"
+                    name="contact" />
+                <div class="alert alert-danger" [hidden]="contact.valid">Museum contact is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'>
+            <div class="form-group">
+                <label class="control-label" for="name">Operational hours</label>
+                <input class="form-control" #hours="ngModel" required id="hours" type="text" placeholder="Working hours E.g. 07h00 - 20h00"
+                    [(ngModel)]="museum.hours" name="hours" />
+                <div class="alert alert-danger" [hidden]="hours.valid">Museum operation hours is required</div>
+            </div>
+        </div>
+        <div class='col-xs-12 col-sm-12'[hidden]="saved||!museumForm.valid">
+            <div class="form-group">
+                <label class="checkbox-inline">
+                    <input style="font-size:36px" type="checkbox" value="" (click)="save()" > Confirm Details provided are accurate and you are Human
+                </label>
+              </div>
+        </div>
+        
+    </form>
+</div>

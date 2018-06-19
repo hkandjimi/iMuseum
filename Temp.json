@@ -1,0 +1,20 @@
+{
+    "log":["CRUD+", "REST+", "Changes+", "Attach+"],
+    "databases": {
+        "imuseum": {
+            "server":"http://localhost:8091",
+            "sync":`
+                function (doc) {
+                    channel (doc.channels);
+                }
+            `,
+            "users": {
+                "GUEST": {
+                    "disabled": false,
+                    "admin_channels": ["*"]
+                }
+            }
+        }
+    }
+}
+

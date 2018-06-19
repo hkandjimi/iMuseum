@@ -1,0 +1,84 @@
+/* You can add global styles to this file, and also import other style files */
+#selectedFile {
+    z-index: -1;
+ }
+.full-width {
+    max-height: 720px;
+}
+.btn-circle {
+    width: 80px;
+    height: 80px;
+    text-align: center;
+    padding: 6px 0;
+    font-size: 16px;
+    line-height: 1.428571429;
+    border-radius: 40px;
+  }
+.container {
+    width: 80%;
+    .row {
+        padding:0;
+        
+    }
+}
+.modal{
+    
+    overflow: auto !important; 
+}
+.view {
+    background: url("https://mdbootstrap.com/img/Photos/Others/img (40).jpg")no-repeat center center;
+    background-size: cover;
+}
+    
+.navbar {
+    background-color: rgba(52, 152, 219,0.2);
+    font-size-adjust: 20px;
+    z-index: 1;
+}
+
+.top-nav-collapse {
+    background-color: #4285F4;
+}
+
+.container-events {
+    .well{
+        padding-left:-10rem;
+        padding-right:-10rem;
+    }
+    width: 100%;
+    display: inline-block;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background: url(/assets/images/imm3.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+    .container-about{
+        padding-top: 30px;
+        padding-bottom: 30px;
+        font-size: 16px;
+    }
+    .testimonial-card .avatar {
+        border-radius: 50%;
+        width: 120px;
+        height: auto;
+        margin: -65px auto 0;
+        border: 5px solid #fff;
+        background: #FFF;
+    }
+    .testimonial-card .avatar img {
+        width: 100%;
+    }
+    .inner{
+        background: rgba(52, 152, 219,0.8);
+        
+    }
+    .avatar {
+        vertical-align: middle;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+    }
+    

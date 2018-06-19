@@ -18,11 +18,19 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "../node_modules/font-awesome/scss/font-awesome.scss",
+        "../node_modules/angular-bootstrap-md/scss/bootstrap/bootstrap.scss",
+        "../node_modules/angular-bootstrap-md/scss/mdb-free.scss",
+        "./styles.scss",
+        "./rotating-card.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/chart.js/dist/Chart.js",
+        "../node_modules/hammerjs/hammer.min.js",
+        "../node_modules/jquery/dist/jquery.min.js"
+      ],
+      "environmentSource": "environments/environment.ts",
       "environments": {
-        "source": "environments/environment.ts",
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
@@ -41,7 +49,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false,
     "inline": {
       "style": false,
